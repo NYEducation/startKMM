@@ -1,9 +1,10 @@
 package jp.start.kmm.app.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import jp.start.kmm.app.Greeting
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import jp.start.kmm.app.Greeting
+import jp.start.kmm.app.data.ApplicationApi
 
 fun greet(): String {
     return Greeting().greeting()
@@ -15,6 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        ApplicationApi().about { tv.text = it }
     }
 }
