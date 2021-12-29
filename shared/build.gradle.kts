@@ -4,8 +4,11 @@ plugins {
 }
 
 kotlin {
+    val ktor_version = "1.6.7"
+    val coroutines_version = "1.5.2-native-mt"
+
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -17,22 +20,41 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-cio:$ktor_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-android:$ktor_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
+            }
+        }
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
             }
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
+        val iosX64Main by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktor_version")
+            }
+        }
+        val iosArm64Main by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktor_version")
+            }
+        }
         //val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependsOn(commonMain)
