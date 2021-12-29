@@ -1,12 +1,28 @@
 import SwiftUI
 import shared
 
-struct ContentView: View {
-	let greet = Greeting().greeting()
+class ViewModel : ObservableObject{
+    @Published var content: String = "loading"
 
-	var body: some View {
-		Text(greet)
-	}
+    init() {
+        load()
+    }
+
+    func load() -> Void {
+        ApplicationApi().about { (text) in
+            self.content = text
+        }
+    }
+}
+
+struct ContentView: View {
+
+    @ObservedObject
+    var viewModel = ViewModel()
+
+    var body: some View {
+        Text(viewModel.content)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
