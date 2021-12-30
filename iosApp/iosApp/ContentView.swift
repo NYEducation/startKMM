@@ -10,7 +10,7 @@ class ViewModel : ObservableObject{
 
     func load() -> Void {
         ApplicationApi().about { (text) in
-            self.content = text
+            self.content = text.status
         }
     }
 }
