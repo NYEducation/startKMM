@@ -16,6 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val tv: TextView = findViewById(R.id.text_view)
-        ApplicationApi().about { tv.text = it }
+        ApplicationApi().about { tv.text = it.status }
     }
 }
